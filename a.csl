@@ -5,11 +5,11 @@
        default-locale="en-US">
 
   <info>
-    <title>Custom Author Year Journal Style</title>
-    <id>http://www.zotero.org/styles/custom-author-year-journal</id>
-    <link href="http://www.zotero.org/styles/custom-author-year-journal" rel="self"/>
+    <title>Springer Author Date Custom Style</title>
+    <id>http://www.zotero.org/styles/springer-author-date-custom</id>
+    <link href="http://www.zotero.org/styles/springer-author-date-custom" rel="self"/>
     <author>
-      <name>Custom Citation Style</name>
+      <name>Custom CSL Style</name>
     </author>
     <category citation-format="author-date"/>
     <updated>2026-11-03T00:00:00+00:00</updated>
@@ -21,55 +21,48 @@
             sort-separator=" "
             initialize-with=""
             delimiter=", "
-            and="text"/>
+            and="text"
+            delimiter-precedes-last="never"/>
     </names>
   </macro>
 
-  <macro name="issued">
+  <macro name="year">
     <date variable="issued">
       <date-part name="year"/>
     </date>
   </macro>
 
-  <macro name="title">
-    <text variable="title" text-case="sentence"/>
-  </macro>
-
-  <macro name="container">
-    <text variable="container-title" form="short" font-style="italic"/>
-  </macro>
-
   <citation>
     <layout prefix="(" suffix=")" delimiter="; ">
       <group delimiter=" ">
-        <text macro="author"/>
-        <text macro="issued"/>
+        <names variable="author">
+          <name form="short" and="symbol"/>
+        </names>
+        <text macro="year"/>
       </group>
     </layout>
   </citation>
 
   <bibliography hanging-indent="true"
-                et-al-min="99"
-                entry-spacing="1"
+                entry-spacing="0"
                 line-spacing="1">
     <sort>
       <key macro="author"/>
-      <key macro="issued"/>
+      <key macro="year"/>
     </sort>
     <layout>
       <group delimiter=" ">
         <text macro="author"/>
         <group prefix="(" suffix=")">
-          <text macro="issued"/>
+          <text macro="year"/>
         </group>
-        <text macro="title"/>
-        <group delimiter=" ">
-          <text macro="container"/>
-          <group delimiter=":">
-            <text variable="volume"/>
-            <text variable="page"/>
-          </group>
+        <text variable="title" suffix="."/>
+        <text variable="container-title" form="short"/>
+        <group delimiter=":">
+          <text variable="volume"/>
+          <text variable="page"/>
         </group>
+        <text variable="DOI" prefix=". https://doi.org/"/>
       </group>
     </layout>
   </bibliography>
